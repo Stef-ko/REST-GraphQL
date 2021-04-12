@@ -1,7 +1,8 @@
 import React from "react";
 import { makeStyles, Paper, Tabs, Tab } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
-function Header() {
+function Header(props, history) {
   const useStyles = makeStyles({
     root: {
       flexGrow: 1,
@@ -9,10 +10,11 @@ function Header() {
   });
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    // this.props.history.push(value);
   };
 
   return (
@@ -24,8 +26,8 @@ function Header() {
         textColor='primary'
         centered
       >
-        <Tab label='REST' />
-        <Tab label='GraphQL' />
+        <Tab label='REST' component={Link} to='/rest' />
+        <Tab label='GraphQL' component={Link} to='/graphql' />
       </Tabs>
     </Paper>
   );
