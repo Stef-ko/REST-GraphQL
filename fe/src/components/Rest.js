@@ -1,7 +1,12 @@
 import React from "react";
+import Container from "@material-ui/core/Container";
 
 function Rest() {
-  return <h1>REST Page</h1>;
+  return (
+    <Container maxWidth='sm'>
+      <h1>REST</h1>
+    </Container>
+  );
 }
 
 export default Rest;
