@@ -26,5 +26,14 @@ module.exports = {
       const post = await newPost.save();
       return post;
     },
+    async deletePost(_, { postId }) {
+      try {
+        const post = await Post.findById(postId);
+        await post.delete();
+        return "Post " + postId + "deleted successfully";
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 };

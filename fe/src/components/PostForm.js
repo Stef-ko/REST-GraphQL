@@ -37,16 +37,9 @@ function PostForm() {
 
   const [postBody, setPostBody] = useState();
 
+  //TODO: Display new Post immidieately
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: { body: postBody },
-    update(proxy, result) {
-      const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
-      proxy.writeQuery({
-        query: FETCH_POSTS_QUERY,
-        data: { getPosts: [result.data.createPost, ...data.getPosts] },
-      });
-      postBody = "";
-    },
   });
 
   const handleSubmit = (e) => {
