@@ -5,14 +5,9 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-
-
 import Post from "./Post";
-import PostForm from "./PostForm"
+import PostForm from "./PostForm";
 import FETCH_POSTS_QUERY from "../util/graphql";
-
-
-
 
 function GraphQL() {
   const { loading, data: { getPosts: posts } = {} } = useQuery(
@@ -30,7 +25,7 @@ function GraphQL() {
             </Paper>
           </Grid>
           {posts.map((post) => (
-            <Grid item xs={12}>
+            <Grid key={post.id} item xs={12}>
               <Paper elevation={2}>
                 <Post post={post} />
               </Paper>

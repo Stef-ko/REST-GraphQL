@@ -6,8 +6,10 @@ import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { CardContent, IconButton } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
+import DeleteIcon from "@material-ui/icons/Delete";
 import moment from "moment";
 
 function Post({ post: { body, createdAt } }) {
@@ -51,6 +53,14 @@ function Post({ post: { body, createdAt } }) {
         </IconButton>{" "}
         <IconButton color='secondary' aria-label='like post'>
           <CommentIcon />
+        </IconButton>
+        <IconButton
+          variant='outlined'
+          edge='end'
+          color='secondary'
+          aria-label='like post'
+        >
+          <DeleteIcon />
         </IconButton>
       </CardActions>
     </Card>
