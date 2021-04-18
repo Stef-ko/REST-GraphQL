@@ -16,6 +16,7 @@ function DeleteButton({ postId }) {
   });
 
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
+    variables: { postId: postId },
     update(proxy) {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
@@ -27,7 +28,6 @@ function DeleteButton({ postId }) {
         data: { getPosts: newData },
       });
     },
-    variables: { postId: postId },
   });
 
   const classes = useStyles();
