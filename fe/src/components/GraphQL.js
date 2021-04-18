@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grow from "@material-ui/core/Grow";
 
 import Post from "./Post";
 import PostForm from "./PostForm";
@@ -26,9 +27,15 @@ function GraphQL() {
           </Grid>
           {posts.map((post) => (
             <Grid key={post.id} item xs={12}>
-              <Paper elevation={2}>
-                <Post post={post} />
-              </Paper>
+              <Grow
+                in={true}
+                style={{ transformOrigin: "0 0 0" }}
+                timeout={800}
+              >
+                <Paper elevation={2}>
+                  <Post post={post} />
+                </Paper>
+              </Grow>
             </Grid>
           ))}
         </Grid>

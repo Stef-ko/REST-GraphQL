@@ -11,6 +11,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { useApolloClient } from "@apollo/client";
+
 import FETCH_POSTS_QUERY from "../util/graphql";
 
 // import CREATE_POST_MUTATION from "../util/graphql";
@@ -36,15 +38,27 @@ function PostForm() {
   const classes = useStyles();
 
   const [postBody, setPostBody] = useState();
+  const [inputFocused, setInputFocus] = useState();
 
-  //TODO: Display new Post immidieately
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: { body: postBody },
+    update(proxy, result) {
+      const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
+      proxy.writeQuery({
+        query: FETCH_POSTS_QUERY,
+        data: { getPosts: [result.data.createPost, ...data.getPosts] },
+      });
+    },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createPost();
+    setPostBody("");
+    //TODO: reset Textfield after post was submitted
+    console.log(postBody);
+    setInputFocus(false);
+    // setInputFocus({ postBody } === "" ? true : false);
   };
 
   return (
@@ -69,10 +83,10 @@ function PostForm() {
               fullWidth
               variant='outlined'
               name='postBody'
+              required
               value={postBody}
+              autoFocus={inputFocused}
               onChange={(e) => setPostBody(e.target.value)}
-              // value={this.state.postBody}
-              // onChange={handlePostBodyChange}
             />
             <CardActions>
               <Button
