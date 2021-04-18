@@ -5,7 +5,6 @@ import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
 import { useApolloClient } from "@apollo/client";
 
-//TODO: Remove deleted post from cache
 function DeleteButton({ postId }) {
   const client = useApolloClient();
 
@@ -18,16 +17,14 @@ function DeleteButton({ postId }) {
 
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     update(proxy) {
-      const data = client.readQuery({
+      const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
       });
-      console.log(data);
-      console.log("Post Id: " + postId);
-      let newData = data.getPosts.filter((p) => p.id !== postId);
-      console.log(newData);
-      client.writeQuery({
+      let newData = data;
+      newData = [...newData.getPosts.filter((p) => p.id !== postId)];
+      proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
-        data: newData,
+        data: { getPosts: newData },
       });
     },
     variables: { postId: postId },
@@ -46,7 +43,6 @@ function DeleteButton({ postId }) {
     </IconButton>
   );
 }
-
 const DELETE_POST_MUTATION = gql`
   mutation deletePost($postId: ID!) {
     deletePost(postId: $postId)

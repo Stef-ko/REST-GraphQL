@@ -55,7 +55,7 @@ function PostForm() {
     e.preventDefault();
     createPost();
     setPostBody("");
-    //TODO: reset Textfield after post was submitted
+    //TODO reset Textfield after post was submitted
     console.log(postBody);
     setInputFocus(false);
     // setInputFocus({ postBody } === "" ? true : false);
