@@ -35,5 +35,19 @@ module.exports = {
         throw new Error(err);
       }
     },
+    async updatePost(_, { postId, body }) {
+      try {
+        const post = await Post.findOneAndUpdate(
+          postId,
+          { body: body },
+          { new: true }
+        );
+        console.log(body);
+        console.log(post);
+        return post;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 };
