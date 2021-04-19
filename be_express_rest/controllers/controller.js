@@ -1,9 +1,44 @@
-const db = require("../models");
-const Post = db.Post;
+const Post = require("../models/Post");
+// const Post = db.Post;
 
-exports.create = (req, res) => {};
+exports.create = (req, res) => {
+  console.log(req.body.body);
+  if (!req.body.body) {
+    res.status(400).send({ message: "Post must not be empty" });
+    return;
+  }
+  const newPost = new Post({
+    body: req.body.body,
+    username: "mock username",
+    createdAt: new Date().toISOString(),
+  });
 
-exports.findAll = (req, res) => {};
+  newPost
+    .save(newPost)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(510).send({
+        message: err.message || "Error while saving post",
+      });
+    });
+  //   const post = newPost.save();
+  return newPost;
+};
+
+// exports.findAll = (req, res) => {
+//   Post.find()
+//     .then((data) => {
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving tutorials.",
+//       });
+//     });
+// };
 
 exports.findOne = (req, res) => {};
 

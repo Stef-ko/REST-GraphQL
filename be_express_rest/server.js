@@ -19,6 +19,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Application running" });
 });
 
+require("./app/routes/post.routes")(app);
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Express Server running at http://localhost:${PORT}/`);
