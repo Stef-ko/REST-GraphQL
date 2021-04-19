@@ -42,8 +42,6 @@ module.exports = {
           { body: body },
           { new: true }
         );
-        console.log(body);
-        console.log(post);
         return post;
       } catch (err) {
         throw new Error(err);

@@ -60,15 +60,6 @@ function Post({ post: { id, body, createdAt } }) {
           id: id,
         },
       });
-
-      // const objIndex = data.getPosts.findIndex((p) => p.id == id);
-      // console.log(objIndex);
-      // let newData = [...data.getPosts];
-      // console.log(newData);
-      // newData[objIndex].body = postBody;
-      // console.log(newData[objIndex].body);
-      // newData = [...newData];
-      // newData.getPosts[objIndex].body = result.data.updatePost.body;
     },
   });
 

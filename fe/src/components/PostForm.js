@@ -102,46 +102,6 @@ function PostForm() {
         </form>
       </CardContent>
     </Card>
-    // <Card className={classes.root}>
-    //     <CardHeader
-    //       avatar={<Avatar aria-label='recipe'>S</Avatar>}
-    //       title='User Name'
-    //       subheader=''
-    //     />
-    //     <CardContent>
-    //       <FormControl fullWidth>
-    //         <Typography
-    //           className={classes.title}
-    //           color='textSecondary'
-    //           gutterBottom
-    //         ></Typography>
-    //         <TextField
-    //           id='outlined-multiline-static'
-    //           label='New Post'
-    //           multiline
-    //           rows={4}
-    //           fullWidth
-    //           variant='outlined'
-    //           name='postBody'
-    //           onChange={(e) => setPostBody(e.target.value)}
-    //           value={postBody}
-    //           // value={this.state.postBody}
-    //           // onChange={handlePostBodyChange}
-    //         />
-    //         {/* <p>{postBody}</p> */}
-    //         <CardActions>
-    //           <Button
-    //             // onClick={submitPost}
-    //             type='submit'
-    //             variant='contained'
-    //             color='secondary'
-    //           >
-    //             Submit
-    //           </Button>
-    //         </CardActions>
-    //       </FormControl>
-    //     </CardContent>
-    // </Card>
   );
 }
 
