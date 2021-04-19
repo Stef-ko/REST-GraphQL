@@ -2,20 +2,20 @@ import http from "../http-common";
 
 class httpRestService {
   getAll() {
-    return http.get("/post");
+    return http.get("/posts");
   }
 
   get(id) {
     return http.get(`/post/${id}`);
   }
 
-  create(body) {
-    return http.post("/post", data);
-  }
+  // create(body) {
+  //   return http.post("/post", data);
+  // }
 
-  update(id, body) {
-    return http.put(`/tutorials/${id}`, data);
-  }
+  // update(id, body) {
+  //   return http.put(`/tutorials/${id}`, data);
+  // }
 
   delete(id) {
     return http.delete(`/post/${id}`);
