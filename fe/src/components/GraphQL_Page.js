@@ -52,29 +52,37 @@ function GraphQL() {
           <h1>Request</h1>
           <Grid>
             <Card>
-              <p>
-                <code>
-                  {"{"}
-                  <br />
-                  &nbsp; getPosts {"{"}
-                  <br />
-                  &nbsp; &nbsp; id
-                  <br />
-                  &nbsp; &nbsp; body
-                  <br />
-                  &nbsp; &nbsp; createdAt
-                  <br />
-                  &nbsp; {"}"}
-                  <br />
-                  {"}"};
-                </code>
-              </p>
+              <CardContent>
+                <p>
+                  <code>
+                    {"{"}
+                    <br />
+                    &nbsp; getPosts {"{"}
+                    <br />
+                    &nbsp; &nbsp; id
+                    <br />
+                    &nbsp; &nbsp; body
+                    <br />
+                    &nbsp; &nbsp; createdAt
+                    <br />
+                    &nbsp; {"}"}
+                    <br />
+                    {"}"};
+                  </code>
+                </p>
+              </CardContent>
             </Card>
           </Grid>
           <h1>Response</h1>
           <Grid item xs={12}>
             <Card>
-              <p>{JSON.stringify(posts)}</p>
+              <CardContent>
+                <p>
+                  <code>
+                    <pre>{JSON.stringify(posts, null, 2)}</pre>
+                  </code>
+                </p>
+              </CardContent>
             </Card>
           </Grid>
         </Grid>

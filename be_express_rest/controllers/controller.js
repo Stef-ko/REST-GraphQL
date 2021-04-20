@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   Post.find()
-    .sort({ createdAt: "desc" })
+    .sort({ createdAt: "asc" })
     .then((data) => {
       res.send(data);
     })

@@ -7,15 +7,16 @@ import {
   Grow,
   CircularProgress,
   Card,
+  CardContent,
 } from "@material-ui/core";
 
 import PostForm from "./PostForm";
 
 import httpRestService from "../services/httpRest.service";
-import Post from "./Post";
+import RestPost from "./RestPost";
 
 function Rest() {
-  const [posts, setPosts] = useState([]);
+  const [restposts, setPosts] = useState([]);
 
   useEffect(() => {
     retrievePosts();
@@ -37,23 +38,23 @@ function Rest() {
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <h1>Rest</h1>
-          {posts ? (
+          {restposts ? (
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper>
                   <PostForm />
                 </Paper>
               </Grid>
-              {posts.map((post) => (
+              {restposts.map((restpost) => (
                 //TODO set unique key for rest and graphql post
-                <Grid key={post.createdAt} item xs={12}>
+                <Grid key={restpost.createdAt} item xs={12}>
                   <Grow
                     in={true}
                     style={{ transformOrigin: "0 0 0" }}
                     timeout={800}
                   >
                     <Paper elevation={2}>
-                      <Post post={post} />
+                      <RestPost restpost={restpost} />
                     </Paper>
                   </Grow>
                 </Grid>
@@ -67,18 +68,26 @@ function Rest() {
           <h1>Request</h1>
           <Grid>
             <Card>
-              <p>
-                Request URL:<code>http://localhost:8080/api/posts</code>
-                <br />
-                <br />
-                Request Method: <code>GET</code>
-              </p>
+              <CardContent>
+                <p>
+                  Request URL:<code>http://localhost:8080/api/posts</code>
+                  <br />
+                  <br />
+                  Request Method: <code>GET</code>
+                </p>
+              </CardContent>
             </Card>
           </Grid>
           <h1>Response</h1>
           <Grid item xs={12}>
-            <Card>
-              <p>{JSON.stringify(posts)}</p>
+            <Card color='blue'>
+              <CardContent>
+                <p>
+                  <code>
+                    <pre>{JSON.stringify(restposts, null, 2)}</pre>
+                  </code>
+                </p>
+              </CardContent>
             </Card>
           </Grid>
         </Grid>
