@@ -1,17 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Grow from "@material-ui/core/Grow";
-import Card from "@material-ui/core/Card";
-import { CardContent } from "@material-ui/core";
+import {Container, Paper, Grid, CircularProgress, Grow, Card, CardContent} from "@material-ui/core";
 
 import Post from "./Post";
 import PostForm from "./PostForm";
 import FETCH_POSTS_QUERY from "../util/graphql";
-import { parse } from "graphql";
 
 function GraphQL() {
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(

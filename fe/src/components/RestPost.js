@@ -1,23 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardActions from "@material-ui/core/CardActions";
-import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
-import { CardContent, IconButton } from "@material-ui/core";
+import { makeStyles, Typography, CardContent, IconButton, FormControl, Button, TextField, Grow, Card, CardHeader, CardActions, Avatar } from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
-import FormControl from "@material-ui/core/FormControl";
-import Button from "@material-ui/core/Button";
-import { TextField } from "@material-ui/core";
-import Grow from "@material-ui/core/Grow";
 
 import DeleteButton from "./DeleteButton";
-import { gql, useMutation } from "@apollo/client";
-import FETCH_POSTS_QUERY from "../util/graphql";
+
 
 const useStyles = makeStyles({
   root: {
@@ -123,14 +112,4 @@ function RestPost({ restpost: { _id, body, createdAt } }) {
     </Card>
   );
 }
-
-// const UPDATE_POST_MUTATION = gql`
-//   mutation updatePost($postId: ID!, $body: String!) {
-//     updatePost(postId: $postId, body: $body) {
-//       id
-//       body
-//       createdAt
-//     }
-//   }
-// `;
 export default RestPost;

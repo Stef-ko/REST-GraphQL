@@ -3,10 +3,9 @@ import { IconButton, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
-import { useApolloClient } from "@apollo/client";
+
 
 function DeleteButton({ postId }) {
-  const client = useApolloClient();
 
   const useStyles = makeStyles({
     DeleteButton: {
