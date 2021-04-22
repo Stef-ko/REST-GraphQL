@@ -42,27 +42,6 @@ function RestPost({ restpost: { _id, body, createdAt } }) {
 
   const classes = useStyles();
 
-  // const [updatePost, { error }] = useMutation(UPDATE_POST_MUTATION, {
-  //   variables: { postId: _id, body: postBody },
-  //   update(proxy, result) {
-  //     const data = proxy.readQuery({
-  //       query: FETCH_POSTS_QUERY,
-  //     });
-  //     proxy.writeQuery({
-  //       query: FETCH_POSTS_QUERY,
-  //       data: {
-  //         getPosts: {
-  //           id: _id,
-  //           body: postBody,
-  //         },
-  //       },
-  //       variables: {
-  //         id: id,
-  //       },
-  //     });
-  //   },
-  // });
-
   const handleSave = (e) => {
     e.preventDefault();
     // updatePost();
@@ -124,10 +103,10 @@ function RestPost({ restpost: { _id, body, createdAt } }) {
           <></>
         ) : (
           <>
-            <IconButton color='secondary' aria-label='like post'>
+            <IconButton color='secondary' aria-label='like post' disabled>
               <FavoriteBorderIcon />
             </IconButton>
-            <IconButton color='secondary' aria-label='like post'>
+            <IconButton color='secondary' aria-label='like post' disabled>
               <CommentIcon />
             </IconButton>
             <DeleteButton postId={_id} />

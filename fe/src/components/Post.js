@@ -124,10 +124,10 @@ function Post({ post: { id, body, createdAt } }) {
           <></>
         ) : (
           <>
-            <IconButton color='secondary' aria-label='like post'>
+            <IconButton color='secondary' aria-label='like post' disabled>
               <FavoriteBorderIcon />
             </IconButton>
-            <IconButton color='secondary' aria-label='like post'>
+            <IconButton color='secondary' aria-label='like post' disabled>
               <CommentIcon />
             </IconButton>
             <DeleteButton postId={id} />

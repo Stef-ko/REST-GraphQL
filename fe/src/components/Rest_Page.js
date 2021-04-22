@@ -37,7 +37,7 @@ function Rest() {
     <Container maxWidth='md'>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <h1>Rest</h1>
+          <h1>REST</h1>
           {restposts ? (
             <Grid container spacing={3}>
               <Grid item xs={12}>
@@ -70,7 +70,10 @@ function Rest() {
             <Card>
               <CardContent>
                 <p>
-                  Request URL:<code>http://localhost:8080/api/posts</code>
+                  Request URL:{" "}
+                  <a href='http://localhost:8080/api/posts'>
+                    <code>http://localhost:8080/api/posts</code>
+                  </a>
                   <br />
                   <br />
                   Request Method: <code>GET</code>
@@ -80,7 +83,7 @@ function Rest() {
           </Grid>
           <h1>Response</h1>
           <Grid item xs={12}>
-            <Card color='blue'>
+            <Card>
               <CardContent>
                 <p>
                   <code>

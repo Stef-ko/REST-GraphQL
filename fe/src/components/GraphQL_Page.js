@@ -54,8 +54,17 @@ function GraphQL() {
             <Card>
               <CardContent>
                 <p>
+                  Request URL:{" "}
+                  <a href='http://localhost:5000/'>
+                    <code>http://localhost:5000/</code>
+                  </a>
+                  <br />
+                  <br />
+                  Request Method: <code>POST</code>
+                  <br />
+                  <br />
                   <code>
-                    {"{"}
+                    query {"{"}
                     <br />
                     &nbsp; getPosts {"{"}
                     <br />
