@@ -44,6 +44,16 @@ exports.findOne = (req, res) => {};
 
 exports.update = (req, res) => {};
 
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  Post.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.send("Post " + req.params.id + " deleted successfully");
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error while deleting post " + req.params.id,
+      });
+    });
+};
 
 exports.findAllPublished = (req, res) => {};

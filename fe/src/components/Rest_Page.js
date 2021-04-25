@@ -33,7 +33,6 @@ function Rest() {
   };
 
   const callbackFunction = (RESTPostNew) => {
-    console.log(RESTPostNew.data);
     setPosts([RESTPostNew.data, ...restposts]);
   };
 
