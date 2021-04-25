@@ -19,6 +19,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 
 import RESTDeleteButton from "./REST_DeleteButton";
+import httpRestService from "../services/httpRest.service";
 
 const useStyles = makeStyles({
   root: {
@@ -52,6 +53,13 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
   const callbackFunction = (postId) => {
     parentCallback(postId);
   };
+
+  const updatePost = () => {
+    httpRestService.update(_id, postBody).catch((e) => {
+      console.log(e);
+    });
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -90,6 +98,7 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
                     value='SubmitPost'
                     variant='contained'
                     color='secondary'
+                    onClick={updatePost}
                   >
                     Save
                   </Button>

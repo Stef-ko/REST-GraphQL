@@ -15,9 +15,11 @@ class httpRestService {
     });
   }
 
-  // update(id, body) {
-  //   return http.put(`/tutorials/${id}`, data);
-  // }
+  update(id, body) {
+    return http.put(`posts/updatepost/${id}`, {
+      body: body,
+    });
+  }
 
   delete(id) {
     return http.delete(`/posts/${id}`);
