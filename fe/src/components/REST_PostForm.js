@@ -12,9 +12,6 @@ import { TextField } from "@material-ui/core";
 import { useState } from "react";
 
 import httpRestService from "../services/httpRest.service";
-import { SettingsInputCompositeSharp } from "@material-ui/icons";
-
-// import CREATE_POST_MUTATION from "../util/graphql";
 
 const useStyles = makeStyles({
   root: {
@@ -33,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-function RESTPostForm() {
+function RESTPostForm({ parentCallback }) {
   const classes = useStyles();
 
   const [postBody, setPostBody] = useState();
@@ -43,8 +40,7 @@ function RESTPostForm() {
     httpRestService
       .create(postBody)
       .then((res) => {
-        //TODO Callback Method to return new post to Rest Page
-        console.log(res);
+        parentCallback(res);
       })
       .catch((e) => {
         console.log(e);
@@ -56,7 +52,7 @@ function RESTPostForm() {
     createPost();
     setPostBody("");
     //TODO reset Textfield after post was submitted
-    console.log(postBody);
+    // console.log(postBody);
     setInputFocus(false);
     // setInputFocus({ postBody } === "" ? true : false);
   };

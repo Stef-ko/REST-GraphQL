@@ -32,6 +32,11 @@ function Rest() {
       });
   };
 
+  const callbackFunction = (RESTPostNew) => {
+    console.log(RESTPostNew.data);
+    setPosts([RESTPostNew.data, ...restposts]);
+  };
+
   return (
     <Container maxWidth='md'>
       <Grid container spacing={2}>
@@ -41,7 +46,7 @@ function Rest() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper>
-                  <RESTPostForm />
+                  <RESTPostForm parentCallback={callbackFunction} />
                 </Paper>
               </Grid>
               {restposts.map((restpost) => (
@@ -84,11 +89,9 @@ function Rest() {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <p>
-                  <code>
-                    <pre>{JSON.stringify(restposts, null, 2)}</pre>
-                  </code>
-                </p>
+                <code>
+                  <pre>{JSON.stringify(restposts, null, 2)}</pre>
+                </code>
               </CardContent>
             </Card>
           </Grid>

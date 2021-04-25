@@ -87,11 +87,9 @@ function GraphQL() {
           <Grid item xs={12}>
             <Card>
               <CardContent>
-                <p>
-                  <code>
-                    <pre>{JSON.stringify(posts, null, 2)}</pre>
-                  </code>
-                </p>
+                <code>
+                  <pre>{JSON.stringify(posts, null, 2)}</pre>
+                </code>
               </CardContent>
             </Card>
           </Grid>
