@@ -1,9 +1,17 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import {Container, Paper, Grid, CircularProgress, Grow, Card, CardContent} from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  Grid,
+  CircularProgress,
+  Grow,
+  Card,
+  CardContent,
+} from "@material-ui/core";
 
 import Post from "./Post";
-import PostForm from "./PostForm";
+import GraphQLPostForm from "./GraphQL_PostForm";
 import FETCH_POSTS_QUERY from "../util/graphql";
 
 function GraphQL() {
@@ -20,7 +28,7 @@ function GraphQL() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper>
-                  <PostForm />
+                  <GraphQLPostForm />
                 </Paper>
               </Grid>
               {posts.map((post) => (

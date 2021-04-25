@@ -9,9 +9,11 @@ class httpRestService {
     return http.get(`/post/${id}`);
   }
 
-  // create(body) {
-  //   return http.post("/post", data);
-  // }
+  create(body) {
+    return http.post("http://localhost:8080/api/posts/newpost", {
+      body: body,
+    });
+  }
 
   // update(id, body) {
   //   return http.put(`/tutorials/${id}`, data);

@@ -24,6 +24,7 @@ module.exports = {
       });
 
       const post = await newPost.save();
+      console.log("Post created via GraphQL");
       return post;
     },
     async deletePost(_, { postId }) {

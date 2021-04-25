@@ -10,10 +10,9 @@ import {
   CardContent,
 } from "@material-ui/core";
 
-import PostForm from "./PostForm";
-
 import httpRestService from "../services/httpRest.service";
-import RestPost from "./RestPost";
+import RESTPost from "./RESTPost";
+import RESTPostForm from "./REST_PostForm";
 
 function Rest() {
   const [restposts, setPosts] = useState([]);
@@ -42,7 +41,7 @@ function Rest() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper>
-                  <PostForm />
+                  <RESTPostForm />
                 </Paper>
               </Grid>
               {restposts.map((restpost) => (
@@ -54,7 +53,7 @@ function Rest() {
                     timeout={800}
                   >
                     <Paper elevation={2}>
-                      <RestPost restpost={restpost} />
+                      <RESTPost restpost={restpost} />
                     </Paper>
                   </Grow>
                 </Grid>

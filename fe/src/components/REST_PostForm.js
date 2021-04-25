@@ -10,10 +10,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { TextField } from "@material-ui/core";
 import { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
-import { useApolloClient } from "@apollo/client";
 
-import FETCH_POSTS_QUERY from "../util/graphql";
+import httpRestService from "../services/httpRest.service";
+import { SettingsInputCompositeSharp } from "@material-ui/icons";
 
 // import CREATE_POST_MUTATION from "../util/graphql";
 
@@ -34,22 +33,23 @@ const useStyles = makeStyles({
   },
 });
 
-function PostForm() {
+function RESTPostForm() {
   const classes = useStyles();
 
   const [postBody, setPostBody] = useState();
   const [inputFocused, setInputFocus] = useState();
 
-  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
-    variables: { body: postBody },
-    update(proxy, result) {
-      const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
-      proxy.writeQuery({
-        query: FETCH_POSTS_QUERY,
-        data: { getPosts: [result.data.createPost, ...data.getPosts] },
+  const createPost = () => {
+    httpRestService
+      .create(postBody)
+      .then((res) => {
+        //TODO Callback Method to return new post to Rest Page
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
       });
-    },
-  });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,14 +105,4 @@ function PostForm() {
   );
 }
 
-const CREATE_POST_MUTATION = gql`
-  mutation createPost($body: String!) {
-    createPost(body: $body) {
-      id
-      body
-      createdAt
-    }
-  }
-`;
-
-export default PostForm;
+export default RESTPostForm;

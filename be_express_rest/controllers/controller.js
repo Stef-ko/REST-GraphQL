@@ -2,7 +2,7 @@ const Post = require("../models/Post");
 // const Post = db.Post;
 
 exports.create = (req, res) => {
-  console.log(req.body.body);
+  console.log("Post created via REST");
   if (!req.body.body) {
     res.status(400).send({ message: "Post must not be empty" });
     return;

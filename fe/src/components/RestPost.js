@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-import { makeStyles, Typography, CardContent, IconButton, FormControl, Button, TextField, Grow, Card, CardHeader, CardActions, Avatar } from "@material-ui/core";
+import {
+  makeStyles,
+  Typography,
+  CardContent,
+  IconButton,
+  FormControl,
+  Button,
+  TextField,
+  Grow,
+  Card,
+  CardHeader,
+  CardActions,
+  Avatar,
+} from "@material-ui/core";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 
 import DeleteButton from "./DeleteButton";
-
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-function RestPost({ restpost: { _id, body, createdAt } }) {
+function RESTPost({ restpost: { _id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
@@ -112,4 +124,4 @@ function RestPost({ restpost: { _id, body, createdAt } }) {
     </Card>
   );
 }
-export default RestPost;
+export default RESTPost;
