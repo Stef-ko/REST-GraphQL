@@ -18,7 +18,7 @@ import CommentIcon from "@material-ui/icons/Comment";
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
 
-import DeleteButton from "./DeleteButton";
+import RESTDeleteButton from "./REST_DeleteButton";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   },
 });
 
-function RESTPost({ restpost: { _id, body, createdAt } }) {
+function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
@@ -47,6 +47,10 @@ function RESTPost({ restpost: { _id, body, createdAt } }) {
     e.preventDefault();
     // updatePost();
     setEditMode(false);
+  };
+
+  const callbackFunction = (postId) => {
+    parentCallback(postId);
   };
   return (
     <Card className={classes.root}>
@@ -110,7 +114,7 @@ function RESTPost({ restpost: { _id, body, createdAt } }) {
             <IconButton color='secondary' aria-label='like post' disabled>
               <CommentIcon />
             </IconButton>
-            <DeleteButton postId={_id} />
+            <RESTDeleteButton parentCallback={callbackFunction} postId={_id} />
           </>
         )}
         <IconButton

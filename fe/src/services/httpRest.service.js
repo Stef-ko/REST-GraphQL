@@ -20,7 +20,7 @@ class httpRestService {
   // }
 
   delete(id) {
-    return http.delete(`/post/${id}`);
+    return http.delete(`/posts/${id}`);
   }
 }
 export default new httpRestService();

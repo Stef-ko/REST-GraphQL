@@ -4,9 +4,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
 
-
-function DeleteButton({ postId }) {
-
+function GraphQLDeleteButton({ postId }) {
   const useStyles = makeStyles({
     DeleteButton: {
       padding: "0 0 auto 0",
@@ -48,4 +46,4 @@ const DELETE_POST_MUTATION = gql`
   }
 `;
 
-export default DeleteButton;
+export default GraphQLDeleteButton;

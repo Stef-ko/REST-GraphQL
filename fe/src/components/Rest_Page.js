@@ -32,8 +32,12 @@ function Rest() {
       });
   };
 
-  const callbackFunction = (RESTPostNew) => {
+  const createcallbackFunction = (RESTPostNew) => {
     setPosts([RESTPostNew.data, ...restposts]);
+  };
+
+  const deleteCallbackFunction = (postId) => {
+    setPosts([...restposts.filter((p) => p._id !== postId)]);
   };
 
   return (
@@ -45,7 +49,7 @@ function Rest() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Paper>
-                  <RESTPostForm parentCallback={callbackFunction} />
+                  <RESTPostForm parentCallback={createcallbackFunction} />
                 </Paper>
               </Grid>
               {restposts.map((restpost) => (
@@ -57,7 +61,10 @@ function Rest() {
                     timeout={800}
                   >
                     <Paper elevation={2}>
-                      <RESTPost restpost={restpost} />
+                      <RESTPost
+                        parentCallback={deleteCallbackFunction}
+                        restpost={restpost}
+                      />
                     </Paper>
                   </Grow>
                 </Grid>

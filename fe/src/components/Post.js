@@ -15,7 +15,7 @@ import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
 import Grow from "@material-ui/core/Grow";
 
-import DeleteButton from "./DeleteButton";
+import GraphQLDeleteButton from "./GraphQL_DeleteButton";
 import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
 
@@ -130,7 +130,7 @@ function Post({ post: { id, body, createdAt } }) {
             <IconButton color='secondary' aria-label='like post' disabled>
               <CommentIcon />
             </IconButton>
-            <DeleteButton postId={id} />
+            <GraphQLDeleteButton postId={id} />
           </>
         )}
         <IconButton
