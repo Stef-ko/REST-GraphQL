@@ -5,6 +5,8 @@ module.exports = (app) => {
 
   router.post("/newpost", posts.create);
 
+  router.put("/updatepost/:id", posts.update);
+
   router.delete("/deletepost/:id", posts.delete);
 
   router.get("/", posts.findAll);

@@ -42,7 +42,24 @@ exports.findAll = (req, res) => {
 
 exports.findOne = (req, res) => {};
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  console.log(req);
+  console.log(req.params.id);
+  console.log(req.body.body);
+  Post.findByIdAndUpdate(
+    req.params.id,
+    { body: req.body.body },
+    { rawResult: true }
+  )
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error while updating post " + req.body.id,
+      });
+    });
+};
 
 exports.delete = (req, res) => {
   Post.findByIdAndDelete(req.params.id)

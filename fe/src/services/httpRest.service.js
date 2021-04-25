@@ -5,12 +5,12 @@ class httpRestService {
     return http.get("/posts");
   }
 
-  get(id) {
-    return http.get(`/post/${id}`);
-  }
+  // get(id) {
+  //   return http.get(`/post/${id}`);
+  // }
 
   create(body) {
-    return http.post("http://localhost:8080/api/posts/newpost", {
+    return http.post("/posts/newpost", {
       body: body,
     });
   }
