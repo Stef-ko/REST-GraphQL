@@ -6,13 +6,12 @@ import {
   Grid,
   CircularProgress,
   Grow,
-  Card,
-  CardContent,
 } from "@material-ui/core";
 
-import Post from "./Post";
+import GraphQLPost from "./GraphQL_Post";
 import GraphQLPostForm from "./GraphQL_PostForm";
 import FETCH_POSTS_QUERY from "../util/graphql";
+import GraphQLRequestAccordion from "./GraphQL_RequestAccordion";
 
 function GraphQL() {
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(
@@ -39,7 +38,7 @@ function GraphQL() {
                     timeout={800}
                   >
                     <Paper elevation={2}>
-                      <Post post={post} />
+                      <GraphQLPost post={post} />
                     </Paper>
                   </Grow>
                 </Grid>
@@ -50,6 +49,11 @@ function GraphQL() {
           )}
         </Grid>
         <Grid item xs={6}>
+          <h1>Requests</h1>
+          <GraphQLRequestAccordion posts={posts} />
+        </Grid>
+
+        {/* <Grid item xs={6}>
           <h1>Request</h1>
           <Grid>
             <Card>
@@ -93,7 +97,7 @@ function GraphQL() {
               </CardContent>
             </Card>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );
