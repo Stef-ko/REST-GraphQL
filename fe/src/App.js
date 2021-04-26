@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 import GraphQL from "./components/GraphQL_Page";
-import Rest from "./components/Rest_Page";
+import Rest from "./components/REST_Page";
 
 function App() {
   return (

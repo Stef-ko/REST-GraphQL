@@ -23,7 +23,6 @@ exports.create = (req, res) => {
         message: err.message || "Error while saving post",
       });
     });
-  //   const post = newPost.save();
   return newPost;
 };
 
@@ -43,9 +42,6 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {};
 
 exports.update = (req, res) => {
-  console.log(req);
-  console.log(req.params.id);
-  console.log(req.body.body);
   Post.findByIdAndUpdate(
     req.params.id,
     { body: req.body.body },

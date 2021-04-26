@@ -31,19 +31,21 @@ module.exports = {
       try {
         const post = await Post.findById(postId);
         await post.delete();
-        return "Post " + postId + "deleted successfully";
+        return "Post " + postId + "deleted successfully via GraphQL";
       } catch (err) {
         throw new Error(err);
       }
     },
     async updatePost(_, { postId, body }) {
       try {
-        const post = await Post.findOneAndUpdate(
+        const post = await Post.findByIdAndUpdate(
           postId,
           { body: body },
-          { new: true }
+          { rawResult: true }
         );
-        return post;
+        //TODO Fix return Type(Error. Cannot return non nullable field Post.id)
+        console.log("Post " + postId + " updated successfully");
+        return post.value;
       } catch (err) {
         throw new Error(err);
       }
