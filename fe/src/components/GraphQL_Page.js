@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { useQuery } from "@apollo/client";
 import {
   Container,
@@ -12,11 +12,35 @@ import GraphQLPost from "./GraphQL_Post";
 import GraphQLPostForm from "./GraphQL_PostForm";
 import FETCH_POSTS_QUERY from "../util/graphql";
 import GraphQLRequestAccordion from "./GraphQL_RequestAccordion";
+//TODO Load Request URL from ApolloProvider
+// import apolloURI from "../ApolloProvider";
+
+import { Context } from "../Store/GraphQL_Request_Store";
 
 function GraphQL() {
+  const [state, dispatch] = useContext(Context);
+
   const { loading, error, data: { getPosts: posts } = {} } = useQuery(
     FETCH_POSTS_QUERY
   );
+
+  useEffect(() => {
+    // gets called twice, only the second time the posts are fetched,
+    // check if posts are there to store request and response in global state
+    // console.log(apolloURI);
+    if (posts) {
+      dispatch({
+        type: "ADD_GRAPHQL_REQUEST",
+        payload: {
+          Request: "Get Posts",
+          RequestMethod: "POST",
+          RequestURL: "http://localhost:5000/",
+          RequestBody: FETCH_POSTS_QUERY.loc.source.body,
+          Response: JSON.stringify(posts, null, 2),
+        },
+      });
+    }
+  }, [posts]);
 
   return (
     <Container maxWidth='md'>
@@ -52,52 +76,6 @@ function GraphQL() {
           <h1>Requests</h1>
           <GraphQLRequestAccordion posts={posts} />
         </Grid>
-
-        {/* <Grid item xs={6}>
-          <h1>Request</h1>
-          <Grid>
-            <Card>
-              <CardContent>
-                <p>
-                  Request URL:{" "}
-                  <a href='http://localhost:5000/'>
-                    <code>http://localhost:5000/</code>
-                  </a>
-                  <br />
-                  <br />
-                  Request Method: <code>POST</code>
-                  <br />
-                  <br />
-                  <code>
-                    query {"{"}
-                    <br />
-                    &nbsp; getPosts {"{"}
-                    <br />
-                    &nbsp; &nbsp; id
-                    <br />
-                    &nbsp; &nbsp; body
-                    <br />
-                    &nbsp; &nbsp; createdAt
-                    <br />
-                    &nbsp; {"}"}
-                    <br />
-                    {"}"};
-                  </code>
-                </p>
-              </CardContent>
-            </Card>
-          </Grid>
-          <h1>Response</h1>
-          <Grid item xs={12}>
-            <Card>
-              <CardContent>
-                <code>
-                  <pre>{JSON.stringify(posts, null, 2)}</pre>
-                </code>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid> */}
       </Grid>
     </Container>
   );
