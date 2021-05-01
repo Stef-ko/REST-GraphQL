@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState, useStateRef } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,13 +9,10 @@ import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { TextField } from "@material-ui/core";
-import { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { useApolloClient } from "@apollo/client";
 
 import FETCH_POSTS_QUERY from "../util/graphql";
-
-// import CREATE_POST_MUTATION from "../util/graphql";
+import { Context } from "../Store/GraphQL_Request_Store";
 
 const useStyles = makeStyles({
   root: {
@@ -35,15 +32,24 @@ const useStyles = makeStyles({
 });
 
 function GraphQLPostForm() {
+  const [state, dispatch] = useContext(Context);
+
   const classes = useStyles();
 
   const [postBody, setPostBody] = useState();
   const [inputFocused, setInputFocus] = useState();
 
+  // createPostResult hängt hinterher, zeigt immer Inhalt des Vorgängers
+  // TODO Find out how to set createPostResult immideately
+  const [createPostResult, setCreatePostResult] = useState("dfad");
+
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: { body: postBody },
     update(proxy, result) {
       const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
+
+      setCreatePostResult(JSON.stringify(result, null, 2));
+
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: { getPosts: [result.data.createPost, ...data.getPosts] },
@@ -56,9 +62,18 @@ function GraphQLPostForm() {
     createPost();
     setPostBody("");
     //TODO reset Textfield after post was submitted
-    console.log(postBody);
     setInputFocus(false);
     // setInputFocus({ postBody } === "" ? true : false);
+    dispatch({
+      type: "ADD_GRAPHQL_REQUEST",
+      payload: {
+        Request: "Add Post",
+        RequestMethod: "POST",
+        RequestURL: "http://localhost:5000/",
+        RequestBody: CREATE_POST_MUTATION.loc.source.body,
+        Response: createPostResult,
+      },
+    });
   };
 
   return (

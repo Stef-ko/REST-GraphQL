@@ -13,14 +13,13 @@ import { Context } from "../Store/GraphQL_Request_Store";
 
 function GraphQLRequestAccordion({ posts }) {
   const [state, dispatch] = useContext(Context);
-  console.log(state.requests);
 
   return (
     <>
       {state.requests ? (
         <>
           {state.requests.map((request) => (
-            <Accordion>
+            <Accordion key={request.RequestBody}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1a-content'
@@ -46,10 +45,10 @@ function GraphQLRequestAccordion({ posts }) {
                           <br />
                           <br />
                           <b>Body:</b>
-                          <code>
-                            <pre>{request.RequestBody}</pre>
-                          </code>
                         </p>
+                        <code>
+                          <pre>{request.RequestBody}</pre>
+                        </code>
                       </CardContent>
                     </Card>
                   </Grid>
