@@ -19,7 +19,7 @@ function GraphQLRequestAccordion({ posts }) {
       {state.requests ? (
         <>
           {state.requests.map((request) => (
-            <Accordion key={request.RequestBody}>
+            <Accordion key={request.Response}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1a-content'
