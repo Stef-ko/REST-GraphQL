@@ -35,21 +35,16 @@ function GraphQLPostForm() {
   const [state, dispatch] = useContext(Context);
 
   const classes = useStyles();
-
   const [postBody, setPostBody] = useState();
   const [inputFocused, setInputFocus] = useState();
 
-  // createPostResult hängt hinterher, zeigt immer Inhalt des Vorgängers
-  // TODO Find out how to set createPostResult immideately
-  const [createPostResult, setCreatePostResult] = useState("dfad");
+  const [createPostResult, setCreatePostResult] = useState();
 
   const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
     variables: { body: postBody },
     update(proxy, result) {
       const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
-
-      setCreatePostResult(JSON.stringify(result, null, 2));
-
+      setCreatePostResult(() => JSON.stringify(result, null, 2));
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: { getPosts: [result.data.createPost, ...data.getPosts] },
@@ -64,17 +59,22 @@ function GraphQLPostForm() {
     //TODO reset Textfield after post was submitted
     setInputFocus(false);
     // setInputFocus({ postBody } === "" ? true : false);
-    dispatch({
-      type: "ADD_GRAPHQL_REQUEST",
-      payload: {
-        Request: "Add Post",
-        RequestMethod: "POST",
-        RequestURL: "http://localhost:5000/",
-        RequestBody: CREATE_POST_MUTATION.loc.source.body,
-        Response: createPostResult,
-      },
-    });
   };
+
+  useEffect(() => {
+    if (createPostResult) {
+      dispatch({
+        type: "ADD_GRAPHQL_REQUEST",
+        payload: {
+          Request: "Add Post",
+          RequestMethod: "POST",
+          RequestURL: "http://localhost:5000/",
+          RequestBody: CREATE_POST_MUTATION.loc.source.body,
+          Response: createPostResult,
+        },
+      });
+    }
+  }, [createPostResult]);
 
   return (
     <Card className={classes.root}>

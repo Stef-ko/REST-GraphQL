@@ -12,6 +12,7 @@ It consists of four parts:
 runs at http://localhost:5000/
 
     cd .\be_apollo_graphql\`
+    npm install
     npm start`
 
 ### 3. Express Server for REST Requests
@@ -19,6 +20,7 @@ runs at http://localhost:5000/
 runs at http://localhost:8080/
 
     cd .\be_express_rest\
+    npm install
     npm start
 
 ### 4. React.js Frontend for displaying Results
@@ -26,4 +28,5 @@ runs at http://localhost:8080/
 runs at http://localhost:3000/
 
     cd .\fe\
+    npm install
     npm start
