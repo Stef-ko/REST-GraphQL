@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -21,6 +21,7 @@ import moment from "moment";
 import GraphQLDeleteButton from "./GraphQL_DeleteButton";
 import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
+import { Context } from "../Store/GraphQL_Request_Store";
 
 const useStyles = makeStyles({
   root: {
@@ -43,7 +44,8 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
-  const classes = useStyles();
+  const [state, dispatch] = useContext(Context);
+  const [updatePostResult, setUpdatePostResult] = useState();
 
   const [updatePost, { error }] = useMutation(UPDATE_POST_MUTATION, {
     variables: { postId: id, body: postBody },
@@ -63,14 +65,31 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
           id: id,
         },
       });
+      setUpdatePostResult(() => JSON.stringify(result, null, 2));
     },
   });
+
+  useEffect(() => {
+    if (updatePostResult) {
+      dispatch({
+        type: "ADD_GRAPHQL_REQUEST",
+        payload: {
+          Request: "Update Post",
+          RequestMethod: "POST",
+          RequestURL: "http://localhost:5000/",
+          RequestBody: UPDATE_POST_MUTATION.loc.source.body,
+          Response: updatePostResult,
+        },
+      });
+    }
+  }, [updatePostResult]);
 
   const handleSave = (e) => {
     e.preventDefault();
     updatePost();
     setEditMode(false);
   };
+  const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardHeader

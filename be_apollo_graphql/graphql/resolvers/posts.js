@@ -31,7 +31,8 @@ module.exports = {
       try {
         const post = await Post.findById(postId);
         await post.delete();
-        return "Post " + postId + "deleted successfully via GraphQL";
+        console.log("Post " + postId + "deleted via GraphQL");
+        return "Post " + postId + " deleted successfully via GraphQL";
       } catch (err) {
         throw new Error(err);
       }

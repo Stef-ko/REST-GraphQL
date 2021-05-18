@@ -44,11 +44,11 @@ function GraphQLPostForm() {
     variables: { body: postBody },
     update(proxy, result) {
       const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
-      setCreatePostResult(() => JSON.stringify(result, null, 2));
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: { getPosts: [result.data.createPost, ...data.getPosts] },
       });
+      setCreatePostResult(() => JSON.stringify(result, null, 2));
     },
   });
 

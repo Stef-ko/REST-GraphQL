@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IconButton, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { gql, useMutation } from "@apollo/client";
 import FETCH_POSTS_QUERY from "../util/graphql";
+import { Context } from "../Store/GraphQL_Request_Store";
 
 function GraphQLDeleteButton({ postId }) {
   const useStyles = makeStyles({
@@ -12,20 +13,39 @@ function GraphQLDeleteButton({ postId }) {
     },
   });
 
+  const [state, dispatch] = useContext(Context);
+  const [deletePostResult, setDeletePostResult] = useState();
+
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     variables: { postId: postId },
-    update(proxy) {
+    update(proxy, result) {
       const data = proxy.readQuery({
         query: FETCH_POSTS_QUERY,
       });
       let newData = data;
       newData = [...newData.getPosts.filter((p) => p.id !== postId)];
+      setDeletePostResult(() => JSON.stringify(result, null, 2));
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: { getPosts: newData },
       });
     },
   });
+
+  useEffect(() => {
+    if (deletePostResult) {
+      dispatch({
+        type: "ADD_GRAPHQL_REQUEST",
+        payload: {
+          Request: "DELETE Post",
+          RequestMethod: "POST",
+          RequestURL: "http://localhost:5000/",
+          RequestBody: DELETE_POST_MUTATION.loc.source.body,
+          Response: deletePostResult,
+        },
+      });
+    }
+  }, [deletePostResult]);
 
   const classes = useStyles();
   return (
