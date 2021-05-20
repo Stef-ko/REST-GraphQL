@@ -12,7 +12,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Context } from "../Store/GraphQL_Request_Store";
 
 function GraphQLRequestAccordion({ posts }) {
-  const [state, dispatch] = useContext(Context);
+  const [state] = useContext(Context);
 
   return (
     <>

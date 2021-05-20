@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,6 +12,7 @@ import { TextField } from "@material-ui/core";
 import { useState } from "react";
 
 import httpRestService from "../services/httpRest.service";
+import { Context } from "../Store/REST_Request_Store";
 
 const useStyles = makeStyles({
   root: {
@@ -31,21 +32,41 @@ const useStyles = makeStyles({
 });
 
 function RESTPostForm({ parentCallback }) {
-  const classes = useStyles();
+  const [state, dispatch] = useContext(Context);
 
+  const classes = useStyles();
   const [postBody, setPostBody] = useState();
   const [inputFocused, setInputFocus] = useState();
+
+  const [createPostResult, setCreatePostResult] = useState("");
 
   const createPost = () => {
     httpRestService
       .create(postBody)
       .then((res) => {
         parentCallback(res);
+        setCreatePostResult(() => JSON.stringify(res, null, 2));
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  useEffect(() => {
+    if (createPostResult) {
+      dispatch({
+        type: "Add_REST_REQUEST",
+        payload: {
+          Request: "Add Post",
+          RequestMethod: "POST",
+          RequestURL: "http://localhost:8080/api/posts/newpost",
+          RequestBody: postBody,
+          Response: createPostResult,
+        },
+      });
+      setCreatePostResult("");
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
