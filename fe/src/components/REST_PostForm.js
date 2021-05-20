@@ -66,7 +66,7 @@ function RESTPostForm({ parentCallback }) {
       });
       setCreatePostResult("");
     }
-  });
+  }, [createPostResult]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
