@@ -44,8 +44,8 @@ module.exports = {
           { body: body },
           { rawResult: true }
         );
-        //TODO Fix return Type(Error. Cannot return non nullable field Post.id)
-        console.log("Post " + postId + " updated successfully");
+        //TODO Old value gets returned
+        console.log("Post " + postId + " updated successfully via GraphQL");
         return post.value;
       } catch (err) {
         throw new Error(err);

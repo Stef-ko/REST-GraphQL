@@ -37,7 +37,7 @@ function GraphQLDeleteButton({ postId }) {
       dispatch({
         type: "ADD_GRAPHQL_REQUEST",
         payload: {
-          Request: "DELETE Post",
+          Request: "Delete Post",
           RequestMethod: "POST",
           RequestURL: "http://localhost:5000/",
           RequestBody: DELETE_POST_MUTATION.loc.source.body,

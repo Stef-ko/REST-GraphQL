@@ -6,13 +6,12 @@ import {
   Grid,
   Grow,
   CircularProgress,
-  Card,
-  CardContent,
 } from "@material-ui/core";
 
 import httpRestService from "../services/httpRest.service";
 import RESTPost from "./RESTPost";
 import RESTPostForm from "./REST_PostForm";
+import RESTRequestAccordion from "./REST_RequestAccordion";
 
 function Rest() {
   const [restposts, setPosts] = useState([]);
@@ -75,32 +74,8 @@ function Rest() {
           )}
         </Grid>
         <Grid item xs={6}>
-          <h1>Request</h1>
-          <Grid>
-            <Card>
-              <CardContent>
-                <p>
-                  Request URL:{" "}
-                  <a href='http://localhost:8080/api/posts'>
-                    <code>http://localhost:8080/api/posts</code>
-                  </a>
-                  <br />
-                  <br />
-                  Request Method: <code>GET</code>
-                </p>
-              </CardContent>
-            </Card>
-          </Grid>
-          <h1>Response</h1>
-          <Grid item xs={12}>
-            <Card>
-              <CardContent>
-                <code>
-                  <pre>{JSON.stringify(restposts, null, 2)}</pre>
-                </code>
-              </CardContent>
-            </Card>
-          </Grid>
+          <h1>Requests</h1>
+          <RESTRequestAccordion />
         </Grid>
       </Grid>
     </Container>
