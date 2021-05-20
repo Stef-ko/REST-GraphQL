@@ -3,11 +3,10 @@ import React, { createContext, useReducer } from "react";
 const initialState = {
   requests: [],
 };
-
-const GraphQLRequeststore = ({ children }) => {
+const RESTRequeststore = ({ children }) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
-      case "ADD_GRAPHQL_REQUEST":
+      case "Add_REST_REQUEST":
         const newState = {
           ...state,
           requests: [...state.requests, action.payload],
@@ -25,4 +24,4 @@ const GraphQLRequeststore = ({ children }) => {
 
 export const Context = createContext(initialState);
 
-export default GraphQLRequeststore;
+export default RESTRequeststore;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import {
   Container,
@@ -12,9 +12,12 @@ import httpRestService from "../services/httpRest.service";
 import RESTPost from "./RESTPost";
 import RESTPostForm from "./REST_PostForm";
 import RESTRequestAccordion from "./REST_RequestAccordion";
+import { Context } from "../Store/REST_Request_Store";
 
 function Rest() {
   const [restposts, setPosts] = useState([]);
+
+  const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
     retrievePosts();
@@ -25,6 +28,16 @@ function Rest() {
       .getAll()
       .then((res) => {
         setPosts(res.data);
+        dispatch({
+          type: "Add_REST_REQUEST",
+          payload: {
+            Request: "Get Posts",
+            RequestMethod: "GET",
+            RequestURL: "http://localhost:8080/api/posts",
+            RequestBody: "",
+            Response: JSON.stringify(res, null, 2),
+          },
+        });
       })
       .catch((e) => {
         console.log(e);

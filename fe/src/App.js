@@ -5,13 +5,16 @@ import GraphQLRequeststore from "./Store/GraphQL_Request_Store";
 import Header from "./components/Header";
 import GraphQL from "./components/GraphQL_Page";
 import Rest from "./components/REST_Page";
+import RESTRequeststore from "./Store/REST_Request_Store";
 
 function App() {
   return (
     <>
       <Router>
         <Header history />;
-        <Route exact path='/rest' component={Rest} />
+        <RESTRequeststore>
+          <Route exact path='/rest' component={Rest} />
+        </RESTRequeststore>
         <GraphQLRequeststore>
           <Route exact path='/graphql' component={GraphQL} />
           <Route exact path='/'>
