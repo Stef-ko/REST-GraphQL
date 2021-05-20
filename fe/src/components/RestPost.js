@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   makeStyles,
   Typography,
@@ -20,6 +20,7 @@ import moment from "moment";
 
 import RESTDeleteButton from "./REST_DeleteButton";
 import httpRestService from "../services/httpRest.service";
+import { Context } from "../Store/REST_Request_Store";
 
 const useStyles = makeStyles({
   root: {
@@ -42,6 +43,9 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
+  const [state, dispatch] = useContext(Context);
+  const [updatePostResult, setUpdatePostResult] = useState();
+
   const classes = useStyles();
 
   const handleSave = (e) => {
@@ -55,10 +59,30 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
   };
 
   const updatePost = () => {
-    httpRestService.update(_id, postBody).catch((e) => {
-      console.log(e);
-    });
+    httpRestService
+      .update(_id, postBody)
+      .then((res) => {
+        setUpdatePostResult(JSON.stringify(res, null, 2));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
+
+  useEffect(() => {
+    if (updatePostResult) {
+      dispatch({
+        type: "Add_REST_REQUEST",
+        payload: {
+          Request: "Update Post",
+          RequestMethod: "PUT",
+          RequestBody: postBody, //TODO RequestBody doesnt get displayed
+          RequestURL: `http://localhost:8080/api/posts/updatepost/${_id}`,
+          Response: updatePostResult,
+        },
+      });
+    }
+  }, [updatePostResult]);
 
   return (
     <Card className={classes.root}>

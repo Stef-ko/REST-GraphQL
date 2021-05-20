@@ -12,6 +12,7 @@ import { Context } from "../Store/REST_Request_Store";
 
 function RESTRequestAccordion({ posts }) {
   const [state] = useContext(Context);
+
   return (
     <>
       {state.requests ? (

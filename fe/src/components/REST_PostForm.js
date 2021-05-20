@@ -58,9 +58,9 @@ function RESTPostForm({ parentCallback }) {
         type: "Add_REST_REQUEST",
         payload: {
           Request: "Add Post",
+          RequestBody: postBody, //TODO RequestBody doesnt get displayed
           RequestMethod: "POST",
           RequestURL: "http://localhost:8080/api/posts/newpost",
-          RequestBody: postBody,
           Response: createPostResult,
         },
       });
