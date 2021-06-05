@@ -57,6 +57,14 @@ function GraphQLRequestAccordion({ posts }) {
                     <h4>Response</h4>
                     <Card elevation={2}>
                       <CardContent>
+                        <b>
+                          Size:{" "}
+                          {request.RequestSize ? (
+                            <code>{request.RequestSize.toFixed(2)} KB</code>
+                          ) : (
+                            <code>???</code>
+                          )}
+                        </b>
                         <code>
                           <pre>{request.Response}</pre>
                         </code>

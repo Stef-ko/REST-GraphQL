@@ -27,8 +27,6 @@ function Rest() {
     httpRestService
       .getAll()
       .then((res) => {
-        console.log(res);
-        console.log((JSON.stringify(res).length * 16) / 8 / 1024 / 2);
         setPosts(res.data);
         dispatch({
           type: "Add_REST_REQUEST",

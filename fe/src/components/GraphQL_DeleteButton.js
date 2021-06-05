@@ -41,6 +41,9 @@ function GraphQLDeleteButton({ postId }) {
           RequestMethod: "POST",
           RequestURL: "http://localhost:5000/",
           RequestBody: DELETE_POST_MUTATION.loc.source.body,
+          //TODO Fix calculation of Size to be exact or read it from the header
+          RequestSize:
+            (JSON.stringify(deletePostResult).length * 16) / 8 / 1024 / 2,
           Response: deletePostResult,
         },
       });

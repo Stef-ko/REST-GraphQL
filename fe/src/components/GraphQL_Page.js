@@ -20,9 +20,11 @@ import { Context } from "../Store/GraphQL_Request_Store";
 function GraphQL() {
   const [state, dispatch] = useContext(Context);
 
-  const { loading, error, data: { getPosts: posts } = {} } = useQuery(
-    FETCH_POSTS_QUERY
-  );
+  const {
+    loading,
+    error,
+    data: { getPosts: posts } = {},
+  } = useQuery(FETCH_POSTS_QUERY);
 
   // Workaround, to avoid getting displayed a new Request Accordion for every change on posts
   const [initiallyLoaded, setInitiallyLoaded] = useState(false);
@@ -41,6 +43,8 @@ function GraphQL() {
             RequestMethod: "POST",
             RequestURL: "http://localhost:5000/",
             RequestBody: FETCH_POSTS_QUERY.loc.source.body,
+            //TODO Fix calculation of Size to be exact or read it from the header
+            RequestSize: (JSON.stringify(posts).length * 16) / 8 / 1024 / 2,
             Response: JSON.stringify(posts, null, 2),
           },
         });

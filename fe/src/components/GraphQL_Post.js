@@ -78,6 +78,9 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
           RequestMethod: "POST",
           RequestURL: "http://localhost:5000/",
           RequestBody: UPDATE_POST_MUTATION.loc.source.body,
+          //TODO Fix calculation of Size to be exact or read it from the header
+          RequestSize:
+            (JSON.stringify(updatePostResult).length * 16) / 8 / 1024 / 2,
           Response: updatePostResult,
         },
       });
