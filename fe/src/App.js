@@ -18,7 +18,7 @@ function App() {
         <GraphQLRequeststore>
           <Route exact path='/graphql' component={GraphQL} />
           <Route exact path='/'>
-            <Redirect to='/graphql' />
+            <Redirect to='/rest' />
           </Route>
         </GraphQLRequeststore>
       </Router>
