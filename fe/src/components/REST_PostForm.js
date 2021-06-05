@@ -58,9 +58,12 @@ function RESTPostForm({ parentCallback }) {
         type: "Add_REST_REQUEST",
         payload: {
           Request: "Add Post",
-          RequestBody: postBody, //TODO RequestBody doesnt get displayed
           RequestMethod: "POST",
           RequestURL: "http://localhost:8080/api/posts/newpost",
+          RequestBody: postBody,
+          //TODO Fix calculation of Size to be exact or read it from the header
+          RequestSize:
+            (JSON.stringify(createPostResult).length * 16) / 8 / 1024 / 2,
           Response: createPostResult,
         },
       });

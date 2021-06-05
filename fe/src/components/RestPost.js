@@ -76,8 +76,11 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
         payload: {
           Request: "Update Post",
           RequestMethod: "PUT",
-          RequestBody: postBody, //TODO RequestBody doesnt get displayed
+          RequestBody: postBody,
           RequestURL: `http://localhost:8080/api/posts/updatepost/${_id}`,
+          //TODO Fix calculation of Size to be exact or read it from the header
+          RequestSize:
+            (JSON.stringify(updatePostResult).length * 16) / 8 / 1024 / 2,
           Response: updatePostResult,
         },
       });

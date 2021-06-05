@@ -35,8 +35,11 @@ function DeleteButton({ postId, parentCallback }) {
         payload: {
           Request: "Delete Post",
           RequestMethod: "DELETE",
-          RequestBody: "",
           RequestURL: `http://localhost:8080/api/posts/deletepost/${postId}`,
+          RequestBody: "",
+          //TODO Fix calculation of Size to be exact or read it from the header
+          RequestSize:
+            (JSON.stringify(deletePostResult).length * 16) / 8 / 1024 / 2,
           Response: deletePostResult,
         },
       });

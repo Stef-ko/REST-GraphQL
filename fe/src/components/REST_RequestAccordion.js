@@ -10,7 +10,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useContext } from "react";
 import { Context } from "../Store/REST_Request_Store";
 
-function RESTRequestAccordion({ posts }) {
+function RESTRequestAccordion() {
   const [state] = useContext(Context);
 
   return (
@@ -56,6 +56,16 @@ function RESTRequestAccordion({ posts }) {
                     <h4>Response</h4>
                     <Card elevation={2}>
                       <CardContent>
+                        <b>
+                          Size:{" "}
+                          {request.RequestSize ? (
+                            <code>{request.RequestSize.toFixed(2)} KB</code>
+                          ) : (
+                            <code>???</code>
+                          )}
+                        </b>
+
+                        {/* <code>{request.headers.contentlength}</code> */}
                         <code>
                           <pre>{request.Response}</pre>
                         </code>
