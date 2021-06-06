@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Router>
-        <Header history />;
+        <Header history />
         <RESTRequeststore>
           <Route exact path='/rest' component={Rest} />
         </RESTRequeststore>
