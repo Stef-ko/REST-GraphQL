@@ -65,6 +65,17 @@ function GraphQLRequestAccordion({ posts }) {
                             <code>???</code>
                           )}
                         </b>
+                        <br />
+                        <b>
+                          Execution Time:{" "}
+                          {request.RequestExecutionTime ? (
+                            <code>
+                              {request.RequestExecutionTime.toFixed(2)} ms
+                            </code>
+                          ) : (
+                            <code>???</code>
+                          )}
+                        </b>
                         <code>
                           <pre>{request.Response}</pre>
                         </code>

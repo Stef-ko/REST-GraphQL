@@ -24,9 +24,12 @@ function Rest() {
   }, []);
 
   const retrievePosts = () => {
+    var start = performance.now();
+
     httpRestService
       .getAll()
       .then((res) => {
+        var time = performance.now();
         setPosts(res.data);
         dispatch({
           type: "Add_REST_REQUEST",
@@ -37,6 +40,7 @@ function Rest() {
             RequestBody: "",
             //TODO Fix calculation of Size to be exact or read it from the header
             RequestSize: (JSON.stringify(res).length * 16) / 8 / 1024 / 2,
+            RequestExecutionTime: time - start,
             Response: JSON.stringify(res, null, 2),
           },
         });

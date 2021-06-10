@@ -64,6 +64,17 @@ function RESTRequestAccordion() {
                             <code>???</code>
                           )}
                         </b>
+                        <br></br>
+                        <b>
+                          Execution Time:{" "}
+                          {request.RequestExecutionTime ? (
+                            <code>
+                              {request.RequestExecutionTime.toFixed(2)} ms
+                            </code>
+                          ) : (
+                            <code>???</code>
+                          )}
+                        </b>
 
                         {/* <code>{request.headers.contentlength}</code> */}
                         <code>
