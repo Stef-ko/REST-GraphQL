@@ -170,6 +170,7 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
   );
 }
 
+//TODO Only return success message for update, no need to return complete Post, because it is done seperately anyway
 const UPDATE_POST_MUTATION = gql`
   mutation updatePost($postId: ID!, $body: String!) {
     updatePost(postId: $postId, body: $body) {
