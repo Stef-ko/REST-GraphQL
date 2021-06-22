@@ -44,15 +44,12 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
   const [updatePostResult, setUpdatePostResult] = useState();
 
-  const [updatePost, { error }] = useMutation(UPDATE_POST_MUTATION, {
+  const [updatePost,] = useMutation(UPDATE_POST_MUTATION, {
     variables: { postId: id, body: postBody },
     update(proxy, result) {
-      const data = proxy.readQuery({
-        query: FETCH_POSTS_QUERY,
-      });
       proxy.writeQuery({
         query: FETCH_POSTS_QUERY,
         data: {
@@ -85,6 +82,7 @@ function GraphQLPost({ post: { id, body, createdAt } }) {
         },
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatePostResult]);
 
   const handleSave = (e) => {

@@ -18,12 +18,10 @@ import GraphQLRequestAccordion from "./GraphQL_RequestAccordion";
 import { Context } from "../Store/GraphQL_Request_Store";
 
 function GraphQL() {
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
 
   var start = performance.now();
   const {
-    loading,
-    error,
     data: { getPosts: posts } = {},
   } = useQuery(FETCH_POSTS_QUERY);
   var time = performance.now();
@@ -54,6 +52,7 @@ function GraphQL() {
         });
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [posts]);
 
   return (

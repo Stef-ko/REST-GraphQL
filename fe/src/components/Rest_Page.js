@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 
 import httpRestService from "../services/httpRest.service";
-import RESTPost from "./RESTPost";
+import RESTPost from "./REST_Post";
 import RESTPostForm from "./REST_PostForm";
 import RESTRequestAccordion from "./REST_RequestAccordion";
 import { Context } from "../Store/REST_Request_Store";
@@ -17,10 +17,11 @@ import { Context } from "../Store/REST_Request_Store";
 function Rest() {
   const [restposts, setPosts] = useState([]);
 
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
 
   useEffect(() => {
     retrievePosts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const retrievePosts = () => {

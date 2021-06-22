@@ -13,7 +13,7 @@ function GraphQLDeleteButton({ postId }) {
     },
   });
 
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
   const [deletePostResult, setDeletePostResult] = useState();
 
   const [deletePost] = useMutation(DELETE_POST_MUTATION, {
@@ -48,6 +48,7 @@ function GraphQLDeleteButton({ postId }) {
         },
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deletePostResult]);
 
   const classes = useStyles();

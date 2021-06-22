@@ -43,7 +43,7 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
   const [editMode, setEditMode] = useState(false);
   const [postBody, setPostBody] = useState(body);
 
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
   const [updatePostResult, setUpdatePostResult] = useState();
 
   const classes = useStyles();
@@ -85,6 +85,7 @@ function RESTPost({ parentCallback, restpost: { _id, body, createdAt } }) {
         },
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updatePostResult]);
 
   return (

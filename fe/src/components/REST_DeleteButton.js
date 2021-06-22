@@ -12,7 +12,7 @@ function DeleteButton({ postId, parentCallback }) {
     },
   });
 
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
   const [deletePostResult, setDeletePostResult] = useState();
 
   const deletePost = () => {

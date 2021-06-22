@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useStateRef } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 function GraphQLPostForm() {
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
 
   const classes = useStyles();
   const [postBody, setPostBody] = useState();
@@ -40,7 +40,7 @@ function GraphQLPostForm() {
 
   const [createPostResult, setCreatePostResult] = useState();
 
-  const [createPost, { error }] = useMutation(CREATE_POST_MUTATION, {
+  const [createPost] = useMutation(CREATE_POST_MUTATION, {
     variables: { body: postBody },
     update(proxy, result) {
       const data = proxy.readQuery({ query: FETCH_POSTS_QUERY });
@@ -77,6 +77,7 @@ function GraphQLPostForm() {
         },
       });
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createPostResult]);
 
   return (

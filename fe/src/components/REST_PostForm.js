@@ -32,7 +32,7 @@ const useStyles = makeStyles({
 });
 
 function RESTPostForm({ parentCallback }) {
-  const [state, dispatch] = useContext(Context);
+  const [, dispatch] = useContext(Context);
 
   const classes = useStyles();
   const [postBody, setPostBody] = useState();
@@ -69,6 +69,7 @@ function RESTPostForm({ parentCallback }) {
       });
       setCreatePostResult("");
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createPostResult]);
 
   const handleSubmit = (e) => {
