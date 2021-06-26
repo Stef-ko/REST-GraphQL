@@ -11,9 +11,9 @@ It consists of four parts:
 
 runs at http://localhost:5000/
 
-    cd .\be_apollo_graphql\`
+    cd .\be_apollo_graphql\
     npm install
-    npm start`
+    npm start
 
 ### 3. Express Server for REST Requests
 
