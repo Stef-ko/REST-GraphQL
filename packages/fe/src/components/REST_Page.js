@@ -14,7 +14,7 @@ import RESTPostForm from "./REST_PostForm";
 import RESTRequestAccordion from "./REST_RequestAccordion";
 import { Context } from "../Store/REST_Request_Store";
 
-function Rest() {
+function REST() {
   const [restposts, setPosts] = useState([]);
 
   const [, dispatch] = useContext(Context);
@@ -102,4 +102,4 @@ function Rest() {
   );
 }
 
-export default Rest;
+export default REST;

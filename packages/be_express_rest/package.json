@@ -1,11 +1,11 @@
 {
-  "name": "be_express_rest",
+  "name": "be_express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo testing Express Server",
+    "start": "node server.js"
   },
   "author": "Stefan Kränzle",
   "license": "ISC",
